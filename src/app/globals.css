@@ -1,0 +1,191 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-primary-50: var(--primary-50);
+  
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  
+  --color-text-primary: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+  --color-text-light: var(--text-light);
+  
+  --color-danger: var(--danger);
+  --color-danger-light: var(--danger-light);
+  
+  --color-warning: var(--warning);
+  --color-warning-light: var(--warning-light);
+  
+  --color-border: var(--border);
+  --color-border-light: var(--border-light);
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  /* Light Mode Colors */
+  --primary: #10b981;
+  --primary-dark: #059669;
+  --primary-light: #d1fae5;
+  --primary-50: #ecfdf5;
+  
+  --background: #fdfdf7;
+  --surface: #ffffff;
+  
+  --text-primary: #1a1a1a;
+  --text-muted: #6b7280;
+  --text-light: #9ca3af;
+  
+  --danger: #ef4444;
+  --danger-light: #fee2e2;
+  
+  --warning: #f59e0b;
+  --warning-light: #fef3c7;
+  
+  --border: #e5e7eb;
+  --border-light: #f3f4f6;
+}
+
+[data-theme='dark'] {
+  /* Dark Mode Colors */
+  --primary: #10b981;
+  --primary-dark: #34d399; /* Lighter hover in dark mode */
+  --primary-light: #064e3b;
+  --primary-50: #022c22;
+  
+  --background: #09090b; /* Very dark zinc */
+  --surface: #18181b;    /* Dark zinc for cards */
+  
+  --text-primary: #f4f4f5;
+  --text-muted: #a1a1aa;
+  --text-light: #71717a;
+  
+  --danger: #ef4444;
+  --danger-light: #7f1d1d;
+  
+  --warning: #f59e0b;
+  --warning-light: #78350f;
+  
+  --border: #27272a;
+  --border-light: #1f1f22;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
+/* Skeleton animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-border-light) 25%,
+    var(--color-border) 50%,
+    var(--color-border-light) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Slide up animation */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+/* Scale in for modals */
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.2s ease-out forwards;
+}
+
+/* Toast overrides */
+.toast-custom {
+  font-family: var(--font-sans) !important;
+}
+
+/* Number input - hide spinners */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Focus visible for keyboard nav */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Safe area for mobile notches */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
